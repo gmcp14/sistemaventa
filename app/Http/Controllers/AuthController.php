@@ -42,4 +42,8 @@ class AuthController extends Controller
         ]);
         return "Admin creado con exito!";
     }
+    public function logout(){
+        Auth::logout();
+        return to_route('login');
+    }
 }
