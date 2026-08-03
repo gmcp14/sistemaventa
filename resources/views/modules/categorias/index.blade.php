@@ -29,14 +29,14 @@
                     <div class="table-responsive">
                         <table id="zero_config" class="table table-striped table-bordered">
                             <thead>
-                                <tr>
+                                <tr class="text-center">
                                     <th>Nombre Categoria</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($items as $item)
-                                <tr>
+                                <tr class="text-center">
                                     <td>{{$item->nombre}}</td>
                                     <td>
                                         <a href="{{route('categorias.edit', $item->id)}}" class="btn btn-warning btn-sm"><i class=" fas fa-pen-square"></i>

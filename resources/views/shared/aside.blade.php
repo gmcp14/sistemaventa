@@ -56,7 +56,7 @@
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('usuarios') }}" aria-expanded="false">
-                                <i class="mdi mdi-border-style"></i>
+                                <i class="fas fa-users"></i>
                                 <span class="hide-menu">Usuarios</span>
                             </a>
                         </li>
