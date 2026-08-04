@@ -110,6 +110,7 @@
     <script src="{{ asset ('assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js') }}"></script>
     <script src="{{ asset ('dist/js/pages/dashboards/dashboard1.js') }}"></script>
          @yield('js')
+         @stack('scripts')
 </body>
 
 </html>

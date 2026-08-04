@@ -80,4 +80,14 @@ class Usuarios extends Controller
     {
         //
     }
+    public function tbody(){
+        $items = User::all();
+        return view('modules.usuarios.tbody', compact('items'));
+    }
+    public function estado($id, $estado){
+        $item = User::find($id);
+        $item->activo = $estado;
+       
+        return  $item->save();
+    }
 }

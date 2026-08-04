@@ -3,6 +3,7 @@
 @section('contenido')
 @section('css')
 <link href="{{ asset('assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/libs/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
 @endsection
 <div class="page-breadcrumb">
     <div class="row">
@@ -39,36 +40,8 @@
                                     <th>Editar</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach($items as $item)
-                                <tr class="text-center">
-                                    <td>{{$item->email}}</td>
-                                    <td>{{$item->name}}</td>
-                                    <td>{{$item->rol}}</td>
-                                    <td href="" class="btn btn-secondary btn-sm"><i class=" fas fa-key"></i></td>
-                                    <td class=" text-white">
-                                        @if($item->activo)
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
-                                                checked>
-                                            
-                                        </div>
-                                        @else
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                            
-                                        </div>
-                                        @endif
-                                    </td>
-
-
-                                    <td>
-                                        <a href="{{route('usuarios.edit', $item->id)}}" class="btn btn-warning btn-sm"><i class=" fas fa-pen-square"></i>
-                                        </a>
-                                       
-                                    </td>
-                                </tr>
-                                @endforeach
+                            <tbody id="tbody-usuarios">
+                               @include('modules.usuarios.tbody')
                             </tbody>
 
                         </table>
@@ -78,9 +51,46 @@
         </div>
     </div>
 </div>
+@include('modules.usuarios.modal_cambiar_password')
 
 @endsection
 @section('js')
 <script src="{{ asset('assets/extra-libs/DataTables/datatables.min.js') }}"></script>
 <script src="{{ asset ('dist/js/pages/datatable/datatable-basic.init.js') }}"></script>
+<script src="{{ asset ('assets/libs/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 @endsection
+
+@push('scripts')
+<script>
+    function recargar_tbody(){
+        $.ajax({
+            type:'GET',
+            url:"{{route('usuarios.tbody')}}",
+            success:function(respuesta){
+               // console.log(respuesta);
+            }
+        });
+    }
+    function cambiar_estado(id, estado){
+        $.ajax({
+            type:"GET",
+            url:"usuarios/cambiar-estado/"+ id + "/" + estado,
+            success:function(respuesta){
+               if(respuesta== 1){
+                alert("cambio de estado correcto");
+                recargar_tbody()
+               }
+                
+            }
+        });
+    }
+    $(document).ready(function(){
+        $(".form-check-input").on("change", function(){
+            let id = $(this).attr("id");
+            let estado = $(this).is(":checked") ? 1 : 0;
+           cambiar_estado(id, estado);
+            
+        });
+    });
+    </script>
+@endpush
