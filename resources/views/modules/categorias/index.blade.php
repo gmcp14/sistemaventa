@@ -56,6 +56,7 @@
 </div>
 
 @endsection
+
 @section('js')
 <script src="{{ asset('assets/extra-libs/DataTables/datatables.min.js') }}"></script>
 <script src="{{ asset ('dist/js/pages/datatable/datatable-basic.init.js') }}"></script>

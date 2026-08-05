@@ -4,7 +4,7 @@
      <td>{{$item->name}}</td>
      <td>{{$item->rol}}</td>
      <td>
-        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cambiar_password">
+        <a href="#" onclick="agregar_id_usuario({{$item->id}})" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
             <i class=" fas fa-key"></i>
         </a>
     </td>
@@ -16,7 +16,7 @@
          
          <div class="form-check form-switch">
              <input class="form-check-input" type="checkbox" id="{{$item->id}}"
-             {{ $item->activo ? 'checked' : ''}}>
+             {{ $item->activo ? 'checked' : ''}} >
 
          </div>
          

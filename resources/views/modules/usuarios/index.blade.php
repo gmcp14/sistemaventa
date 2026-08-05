@@ -62,10 +62,11 @@
 
 @push('scripts')
 <script>
+ 
     function recargar_tbody(){
         $.ajax({
             type:'GET',
-            url:"{{route('usuarios.tbody')}}",
+            url:"{{ route('usuarios.tbody') }}",
             success:function(respuesta){
                // console.log(respuesta);
             }
@@ -77,13 +78,59 @@
             url:"usuarios/cambiar-estado/"+ id + "/" + estado,
             success:function(respuesta){
                if(respuesta== 1){
-                alert("cambio de estado correcto");
+                 Swal({
+                    title: 'Exito!',
+                    text: 'Cambio de estado exitoso!',
+                    type: 'success',
+                    confirmButtonText:'Aceptar'
+                });
                 recargar_tbody()
+               }else{
+                   swal({
+                    title: 'Fallo!',
+                    text: 'no se completo el cambio',
+                    type: 'error',
+                    confirmButtonText:'Aceptar'
+                });
                }
                 
             }
         });
+    };
+    function agregar_id_usuario(id){
+        $("#id_usuario").val(id);
+        return false;
     }
+    function cambio_password(){
+        let id=$("#id_usuario").val();
+        let password = $("#password").val();
+        $.ajax({
+            type:"GET",
+            url:"usuarios/cambiar-password/" + id + "/" + password,
+            success:function(respuesta){
+                if(respuesta == 1){
+                    Swal({
+                    title: 'Exito!',
+                    text: 'cambio de contraseña exitoso!',
+                    type: 'success',
+                    confirmButtonText:'Aceptar'
+                });
+                    $("#frmpassword")[0].reset();
+                }else{
+                     swal({
+                    title: 'Fallo!',
+                    text: 'cambio de contraseña no exitoso',
+                    type: 'error',
+                    confirmButtonText:'Aceptar'
+                }   );
+                }
+                
+            }
+        })
+        return false;
+    }
+    
+ 
     $(document).ready(function(){
         $(".form-check-input").on("change", function(){
             let id = $(this).attr("id");

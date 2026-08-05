@@ -1,20 +1,27 @@
 
+ <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+     <div class="modal-dialog" role="document">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h4 class="modal-title" id="exampleModalLabel1">Escribe la nueva contraseña</h4>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                         aria-hidden="true">&times;</span></button>
+             </div>
+             <div class="modal-body">
+                 <form  id="frmpassword" onsubmit="return cambio_password()">
+                      <input type="text" id="id_usuario" name="id_usuario" hidden>
+                     <div class="form-group">
+                         <label for="password" class="control-label">Contraseña nueva</label>
+                         <input type="text" class="form-control" id="password" name="password">
+                     </div>
 
-<!-- Modal -->
-<div class="modal fade" id="cambiar_password" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
+                 
+             </div>
+             <div class="modal-footer">
+                 <button  class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                 <button  class="btn btn-primary">Actualizar Contraseña</button>
+             </div>
+             </form>
+         </div>
+     </div>
+ </div>

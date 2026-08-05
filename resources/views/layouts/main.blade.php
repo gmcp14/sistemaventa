@@ -18,6 +18,7 @@
     <link href="{{ asset ('assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="{{ asset ('dist/css/style.min.css') }}" rel="stylesheet">
+        <link href="{{ asset ('assets/libs/sweetalert2/dist/sweetalert2.min.css') }}" rel="stylesheet">
                  @yield('css')
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -109,7 +110,30 @@
     <script src="{{ asset ('assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js') }}"></script>
     <script src="{{ asset ('assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js') }}"></script>
     <script src="{{ asset ('dist/js/pages/dashboards/dashboard1.js') }}"></script>
+    <script src="{{ asset ('assets/libs/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ asset ('assets/libs/sweetalert2/sweet-alert.init.js') }}"></script> -->
          @yield('js')
+             <script>
+        @if(session('success'))
+            Swal({
+          
+                title: 'Exito!',
+                text: '{{session('success')}}',
+                type: 'success',
+                confirmButtonText:'Aceptar'
+            })
+        @endif
+        @if(session('error'))
+            Swal({
+          
+                title: 'Exito!',
+                text: '{{session('success')}}',
+                type: 'error',
+                confirmButtonText:'Aceptar'
+            })
+        @endif
+
+    </script>
          @stack('scripts')
 </body>
 
