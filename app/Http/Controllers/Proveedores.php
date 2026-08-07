@@ -21,7 +21,8 @@ class Proveedores extends Controller
      */
     public function create()
     {
-        //
+        $titulo= 'Agregar Proveedor';
+        return view('modules.proveedores.create', compact('titulo'));
     }
 
     /**
@@ -29,7 +30,19 @@ class Proveedores extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $item= new Proveedor();
+            $item->nombre = $request->nombre;
+            $item->telefono = $request->telefono;
+            $item->email= $request->email;
+            $item->cp= $request->cp;
+            $item->sitio_web = $request->sitio_web;
+            $item->notas = $request->notas;
+            $item->save();
+            return to_route('proveedores')->with("success", "Proveedor agregado con exito!!!");
+        } catch (\Throwable $th) {
+            return to_route('proveedores')->with("error", "Fallo al agregar proveedor!!!" .$th->getMessage());
+        }
     }
 
     /**
@@ -37,7 +50,9 @@ class Proveedores extends Controller
      */
     public function show(string $id)
     {
-        //
+        $titulo= 'Eliminar un  proveedor';
+        $item = Proveedor::find($id);
+        return view('modules.proveedores.show', compact('item', 'titulo'));
     }
 
     /**
@@ -45,7 +60,9 @@ class Proveedores extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $titulo= 'Editar proveedor';
+        $item = Proveedor::find($id);
+        return view('modules.proveedores.edit', compact('item', 'titulo'));
     }
 
     /**
@@ -53,7 +70,19 @@ class Proveedores extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $item = Proveedor::find($id);
+            $item->nombre = $request->nombre;
+            $item->telefono = $request->telefono;
+            $item->email= $request->email;
+            $item->cp= $request->cp;
+            $item->sitio_web = $request->sitio_web;
+            $item->notas = $request->notas;
+            $item->save();
+            return to_route('proveedores')->with('success', 'Actualizado con exito!!!');
+        } catch (\Throwable $th) {
+           return to_route('proveedores')->with("error", "No se pudo actualizar!!!" .$th->getMessage());
+        }
     }
 
     /**
@@ -61,6 +90,12 @@ class Proveedores extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+         $item=Proveedor::find($id);
+         $item->delete();
+         return to_route('proveedores')->with("success", "Proveedor eliminado con exito!!!!");
+        } catch (\Throwable $th) {
+            return to_route('proveedores')->with("error", "Fallo al eliminar!!!!", $th->getMessage());
+        }
     }
 }
