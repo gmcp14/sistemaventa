@@ -5,7 +5,7 @@ use App\Http\Controllers\Ventas;
 use App\Http\Controllers\DetalleVentas;
 use App\Http\Controllers\Categorias;
 use App\Http\Controllers\Productos;
-use App\Http\Controllers\Clientes;
+use App\Http\Controllers\Proveedores;
 use App\Http\Controllers\Usuarios;
 use Illuminate\Support\Facades\Route;
 
@@ -37,8 +37,8 @@ Route::prefix('categorias')->middleware('auth')->group(function(){
 Route::prefix('productos')->middleware('auth')->group(function(){
     Route::get('/', [Productos::class, 'index'])->name('productos');
 });
-Route::prefix('clientes')->middleware('auth')->group(function(){
-    Route::get('/', [Clientes::class, 'index'])->name('clientes');
+Route::prefix('proveedorees')->middleware('auth')->group(function(){
+    Route::get('/', [Proveedores::class, 'index'])->name('proveedores');
 });
 Route::prefix('usuarios')->middleware('auth')->group(function(){
     Route::get('/', [Usuarios::class, 'index'])->name('usuarios');

@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('ventas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constraint('users');
-            $table->foreignId('cliente_id')->nullable()->constraint('clientes')->nullOnDelete();
             $table->float('total_venta');
             $table->timestamps();
         });
