@@ -126,8 +126,8 @@
         @if(session('error'))
             Swal({
           
-                title: 'Exito!',
-                text: '{{session('success')}}',
+                title: 'error!',
+                text: '{{session('error')}}',
                 type: 'error',
                 confirmButtonText:'Aceptar'
             })
