@@ -51,11 +51,16 @@
                                     <td>{{$item->nombre_categoria}}</td>
                                     <td>{{$item->nombre_proveedores}}</td>
                                     <td>{{$item->nombre}}</td>
-                                    <td></td>
+                                    <td>
+                                        <img src="{{asset('storage/' . $item->imagen_producto)}}" alt="" 
+                                        width="60px" height="60px">
+                                        <a href="" class="badge rounded-pill bg-warning text-dark"><i class=" fas fa-pen-square"></i></a>
+                                    </td>
                                     <td>{{$item->descripcion}}</td>
                                     <td>{{$item->cantidad}}</td>
-                                    <td>{{$item->precio_compra}}</td>
                                     <td>{{$item->precio_venta}}</td>
+                                    <td>{{$item->precio_compra}}</td>
+                                    
                                     <td>
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" id="{{$item->id}}"

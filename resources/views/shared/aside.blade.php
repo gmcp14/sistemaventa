@@ -64,7 +64,7 @@
                             </ul>
                         </li>
                           <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('proveedores') }}" aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('compras') }}" aria-expanded="false">
                                 <i class="mdi mdi-border-style"></i>
                                 <span class="hide-menu">Compras</span>
                             </a>

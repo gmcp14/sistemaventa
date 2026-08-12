@@ -7,7 +7,7 @@
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-5 align-self-center">
-            <h4 class="page-title">Compras de productos</h4>
+            <h4 class="page-title">Eliminar compra de productos</h4>
         </div>
         <div class="col-7 align-self-center">
             <div class="d-flex align-items-center justify-content-end">
@@ -22,13 +22,13 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Administrar Compras</h4>
-                    <h6 class="card-subtitle">Administrar la mcompra de producto.</h6>
+                    <h4 class="card-title">Eliminar Compras</h4>
+                    <h6 class="card-subtitle">Una vez eliminada la compra no podrea ser recuperada!</h6>
                    
                    
                     <hr>
                     <div class="table-responsive">
-                        <table id="zero_config" class="table table-striped table-bordered">
+                        <table class="table table-striped table-bordered">
                             <thead>
                                 <tr class="text-center">
                                     <th>Usuario</th>
@@ -37,29 +37,32 @@
                                     <th>Precio de compra</th>
                                     <th>Total de compra</th>
                                     <th>Fecha</th>
-                                    <th>Acciones</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
-                              @foreach($items as $item)
+                             
                                 <tr class="text-center">
-                                    <td>{{$item->nombre_usuario}}</td>
-                                    <td>{{$item->nombre_producto}}</td>
-                                    <td>{{$item->cantidad}}</td>
-                                    <td>{{$item->precio_compra}}</td>
-                                    <td>{{$item->precio_compra * $item->cantidad}}</td>
-                                    <td>{{$item->created_at}}</td>
+                                    <td>{{$items->nombre_usuario}}</td>
+                                    <td>{{$items->nombre_producto}}</td>
+                                    <td>{{$items->cantidad}}</td>
+                                    <td>{{$items->precio_compra}}</td>
+                                    <td>{{$items->precio_compra * $items->cantidad}}</td>
+                                    <td>{{$items->created_at}}</td>
                                   
-                                    <td>
-                                        <a href="{{route('compras.edit', $item->id)}}" class="btn btn-warning btn-sm"><i class=" fas fa-pen-square"></i>
-                                        </a>
-                                        <a href="{{route('compras.show', $item->id)}}" class="btn btn-danger btn-sm"><i class=" fas fa-trash"></i></a>
-                                    </td>
+                                   
                                 </tr>
 
                             </tbody>
-                            @endforeach
+                           
                         </table>
+                        <form action="{{route('compras.destroy', $items->id)}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <input type="text" value="{{$items->producto_id}}" id="producto_id" name="producto_id" hidden>
+                            <button class="btn btn-danger">Eliminar compra</button>
+                            <a href="{{route('compras')}}" class="btn btn-info mt -3">Cancelar</a>
+                        </form>
                     </div>
                 </div>
             </div>
