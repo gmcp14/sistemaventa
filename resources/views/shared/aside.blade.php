@@ -43,11 +43,38 @@
                             </a>
                         </li>
                          <li class="sidebar-item">
+                            <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                                <i class="mdi mdi-tune"></i>
+                                <span class="hide-menu">Productos </span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item">
+                                    <a href="{{ route('productos') }}" class="sidebar-link">
+                                        <i class="mdi mdi-view-quilt"></i>
+                                        <span class="hide-menu"> Administrar producto</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="{{ route ('reportes_productos') }}" class="sidebar-link">
+                                        <i class="mdi mdi-view-parallel"></i>
+                                        <span class="hide-menu"> Reporte de productos </span>
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+                          <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('proveedores') }}" aria-expanded="false">
+                                <i class="mdi mdi-border-style"></i>
+                                <span class="hide-menu">Compras</span>
+                            </a>
+                        </li>
+                         <!-- <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('productos') }}" aria-expanded="false">
                                 <i class="mdi mdi-border-style"></i>
                                 <span class="hide-menu">Productos</span>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('proveedores') }}" aria-expanded="false">
                                 <i class="mdi mdi-border-style"></i>

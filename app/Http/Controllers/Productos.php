@@ -18,7 +18,15 @@ class Productos extends Controller
     public function index()
     {
         $titulo = 'Productos';
-        return view('modules.productos.index', compact('titulo'));
+        $items = Producto::select(
+            'productos.*',
+            'categorias.nombre as nombre_categoria',
+            'proveedores.nombre as nombre_proveedores'
+        )
+        ->join('categorias','productos.categoria_id', '=' , 'categorias.id')
+        ->join('proveedores', 'productos.proveedor_id', '=', 'proveedores.id')
+        ->get();
+        return view('modules.productos.index', compact('titulo', 'items'));
     }
 
     /**
@@ -57,7 +65,17 @@ class Productos extends Controller
      */
     public function show(string $id)
     {
-        //
+        $titulo= 'Eliminar Producto';
+        $items = Producto::select(
+            'productos.*',
+            'categorias.nombre as nombre_categoria',
+            'proveedores.nombre as nombre_proveedores'
+        )
+        ->join('categorias','productos.categoria_id', '=' , 'categorias.id')
+        ->join('proveedores', 'productos.proveedor_id', '=', 'proveedores.id')
+        ->where('productos.id', $id)
+        ->first();
+        return view('modules.productos.show', compact('titulo', 'items'));
     }
 
     /**
@@ -65,7 +83,11 @@ class Productos extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $titulo='Editar Producto';
+        $categorias = Categoria::all();
+        $proveedores = Proveedor::all();
+        $item= Producto::find($id);
+        return view('modules.productos.edit', compact('titulo', 'item','categorias', 'proveedores'));
     }
 
     /**
@@ -73,7 +95,18 @@ class Productos extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $item= Producto::find($id);
+            $item->categoria_id = $request->categoria_id;
+            $item->proveedor_id = $request->proveedor_id;
+            $item->nombre= $request->nombre;
+            $item->descripcion = $request->descripcion;
+            $item->precio_venta = $request->precio_venta;
+            $item->save();
+            return to_route('productos')->with('success','Producto actualizado exitosamente!!.');
+        } catch (\Throwable $th) {
+             return to_route('productos')->with('error','Fallo al actualizar producto!!.' . $th->getMessage());
+        }
     }
 
     /**
@@ -81,6 +114,18 @@ class Productos extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $item= Producto::find($id);
+            $item->delete();
+            return to_route('productos')->with('success','Producto eliminado exitosamente!!.');
+        } catch (\Throwable $th) {
+            return to_route('productos')->with('error','Fallo al eliminar producto!!.' . $th->getMessage());
+        }
+    }
+    public function estado($id, $estado){
+        $item = Producto::find($id);
+        $item->activo = $estado;
+       
+        return  $item->save();
     }
 }

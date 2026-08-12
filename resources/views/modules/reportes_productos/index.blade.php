@@ -25,9 +25,7 @@
                     <h4 class="card-title">Administrar Productos y stock</h4>
                     <h6 class="card-subtitle">Administrar el stock del producto.</h6>
                    
-                    <a href="{{route('productos.create')}}" class="btn btn-primary"><i class="fas fa-plus-circle"></i>
-                        Crear Producto</a>
-                    <hr>
+                   
                     <div class="table-responsive">
                         <table id="zero_config" class="table table-striped table-bordered">
                             <thead>
@@ -40,9 +38,7 @@
                                     <th>Cantidad</th>
                                     <th>Venta</th>
                                     <th>Compra</th>
-                                    <th>Activo</th>
-                                    <th>Comprar</th>
-                                    <th>Acciones</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -56,21 +52,8 @@
                                     <td>{{$item->cantidad}}</td>
                                     <td>{{$item->precio_compra}}</td>
                                     <td>{{$item->precio_venta}}</td>
-                                    <td>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" id="{{$item->id}}"
-                                                {{ $item->activo ? 'checked' : ''}}>
-
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="{{route('compras.create', $item->id)}}" class="btn btn-info">Comprar</a>
-                                    </td>
-                                    <td>
-                                        <a href="{{route('productos.edit', $item->id)}}" class="btn btn-warning btn-sm"><i class=" fas fa-pen-square"></i>
-                                        </a>
-                                        <a href="{{route('productos.show', $item->id)}}" class="btn btn-danger btn-sm"><i class=" fas fa-trash"></i></a>
-                                    </td>
+                                    
+                                    
                                 </tr>
 
                             </tbody>
@@ -89,40 +72,3 @@
 <script src="{{ asset('assets/extra-libs/DataTables/datatables.min.js') }}"></script>
 <script src="{{ asset ('dist/js/pages/datatable/datatable-basic.init.js') }}"></script>
 @endsection
-@push('scripts')
-<script>
-     function cambiar_estado(id, estado){
-        $.ajax({
-            type:"GET",
-            url:"productos/cambiar-estado/"+ id + "/" + estado,
-            success:function(respuesta){
-               if(respuesta== 1){
-                 Swal({
-                    title: 'Exito!',
-                    text: 'Cambio de estado exitoso!',
-                    type: 'success',
-                    confirmButtonText:'Aceptar'
-                });
-                recargar_tbody()
-               }else{
-                   swal({
-                    title: 'Fallo!',
-                    text: 'no se completo el cambio',
-                    type: 'error',
-                    confirmButtonText:'Aceptar'
-                });
-               }
-                
-            }
-        });
-    };
-      $(document).ready(function(){
-        $(".form-check-input").on("change", function(){
-            let id = $(this).attr("id");
-            let estado = $(this).is(":checked") ? 1 : 0;
-            cambiar_estado(id, estado);
-            
-        });
-    });
-</script>
-@endpush
