@@ -127,7 +127,7 @@
             Swal({
           
                 title: 'error!',
-                text: '{{session('error')}}',
+                text: '{{session('success')}}',
                 type: 'error',
                 confirmButtonText:'Aceptar'
             })

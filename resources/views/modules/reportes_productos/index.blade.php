@@ -7,7 +7,7 @@
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-5 align-self-center">
-            <h4 class="page-title">Productos</h4>
+            <h4 class="page-title">reporte de Productos</h4>
         </div>
         <div class="col-7 align-self-center">
             <div class="d-flex align-items-center justify-content-end">
@@ -22,12 +22,16 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Administrar Productos y stock</h4>
-                    <h6 class="card-subtitle">Administrar el stock del producto.</h6>
-                   
+                    <h4 class="card-title">Reportes de productos</h4>
+                    <h6 class="card-subtitle">tipos de reporte del sistema para productos.</h6>
+                   <div class="row">
+                    <div class="col text-end">
+                        <a href="{{route('reportes_productos.falta-stock')}}" class="btn btn-primary btn-sm">Productos con cantidad 1 o 0</a>
+                    </div>
+                   </div>
                    
                     <div class="table-responsive">
-                        <table id="zero_config" class="table table-striped table-bordered">
+                        <table id="file_export" class="table table-striped table-bordered display">
                             <thead>
                                 <tr class="text-center">
                                     <th>Categoria</th>
@@ -47,7 +51,10 @@
                                     <td>{{$item->nombre_categoria}}</td>
                                     <td>{{$item->nombre_proveedores}}</td>
                                     <td>{{$item->nombre}}</td>
-                                    <td></td>
+                                    <td>
+                                         <img src="{{asset('storage/' . $item->imagen_producto)}}" alt="" 
+                                        width="60px" height="60px">
+                                    </td>
                                     <td>{{$item->descripcion}}</td>
                                     <td>{{$item->cantidad}}</td>
                                     <td>{{$item->precio_compra}}</td>
@@ -70,5 +77,12 @@
 
 @section('js')
 <script src="{{ asset('assets/extra-libs/DataTables/datatables.min.js') }}"></script>
-<script src="{{ asset ('dist/js/pages/datatable/datatable-basic.init.js') }}"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+<script src="{{ asset ('dist/js/pages/datatable/datatable-advanced.init.js') }}"></script>
 @endsection

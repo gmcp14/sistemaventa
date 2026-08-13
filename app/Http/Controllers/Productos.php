@@ -6,7 +6,7 @@ use App\Models\Proveedor;
 use App\Models\Producto;
 use App\Models\Imagen;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -23,11 +23,12 @@ class Productos extends Controller
             'productos.*',
             'categorias.nombre as nombre_categoria',
             'proveedores.nombre as nombre_proveedores',
-            'imagenes.ruta as imagen_producto'
+            'imagenes.ruta as imagen_producto',
+            'imagenes.id as imagen_id'
         )
         ->join('categorias','productos.categoria_id', '=' , 'categorias.id')
         ->join('proveedores', 'productos.proveedor_id', '=', 'proveedores.id')
-        ->join('imagenes', 'productos.id', '=', 'imagenes.producto_id')
+        ->leftJoin('imagenes', 'productos.id', '=', 'imagenes.producto_id')
         ->get();
         return view('modules.productos.index', compact('titulo', 'items'));
     }
@@ -148,5 +149,28 @@ class Productos extends Controller
         $item->activo = $estado;
        
         return  $item->save();
+    }
+    public function show_image($id){
+        $titulo="Editar Imagen";
+        $item =Imagen::find($id);
+        return view('modules.productos.show-image', compact('titulo', 'item'));
+    }
+    public function update_image(Request $request, $id){
+       try {
+        $item = Imagen::find($id);
+        if($item->ruta && storage::disk('public')->exists($item->ruta)){
+            storage::disk('public')->delete($item->ruta);
+        }
+       
+        $rutaImagen = $request->file('imagen')->store('imagenes', 'public');
+        $nombreImagen = basename($rutaImagen);
+        $item->ruta = $rutaImagen;
+        $item->nombre = $nombreImagen;
+        $item->save();
+         return to_route('productos')->with('success','Imagen Actualizada exitosamente!!.');
+       } catch (\Throwable $th) {
+       // dd($th);
+         return to_route('productos')->with('error',' no se pudo actualizar la iamgen!!.');
+       }
     }
 }
