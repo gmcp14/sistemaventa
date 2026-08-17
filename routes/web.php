@@ -23,6 +23,9 @@ Route::middleware("auth")->group(function(){
 
 Route::prefix('ventas')->group(function(){
     Route::get('/nueva-venta', [ventas::class, 'index'])->name('ventas-nueva');
+    Route::get('/agregar-carrito/{id_producto}', [ventas::class, 'agregar_carrito'])->name('ventas.agregar.carrito');
+    Route::get('/borrar-carrito', [ventas::class, 'borrar_carrito'])->name('ventas.borrar.carrito');
+    Route::get('/quitar-carrito/{id_producto}', [ventas::class, 'quitar_carrito'])->name('ventas.quitar.carrito');
 });
 Route::prefix('detalle')->middleware('auth')->group(function(){
     Route::get('/detalle-venta', [DetalleVentas::class, 'index'])->name('detalle-venta');

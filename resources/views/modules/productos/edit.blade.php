@@ -48,6 +48,10 @@
                               @endif
                             @endforeach
                         </select>
+                         <label for="">Codigo del producto</label>
+                        <input type="text" class="form-control" required name="codigo" id="codigo"
+                            value="{{$item->codigo}}">
+
                         <label for="">Nombre del producto</label>
                         <input type="text" class="form-control" required name="nombre" id="nombre"
                             value="{{$item->nombre}}">
