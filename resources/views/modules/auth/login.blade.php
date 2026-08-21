@@ -22,11 +22,13 @@
         <div class="auth-box">
             <div id="loginform">
                 <div class="logo">
-                    <span class="db"><img src="../../assets/images/logo-icon.png" alt="logo" /></span>
-                    <h5 class="font-medium m-b-20">Ventas y Almacén</h5>
+                    <span class="db"><img src="{{asset('img/login.jpg')}}" alt="logo"  class="img-fluid"/></span>
+                    <h3 class="font-medium m-b-20">Ventas y Almacén</h3>
                 </div>
+                <h5 class="text-center">Ingresa Usuario y Contraseña</h5>
                 <!-- Form -->
                 <div class="row">
+                    
                     <div class="col-12">
                         <form class="form-horizontal m-t-20" id="loginform" method="POST" action="{{route('logear')}}">
                             @csrf
@@ -47,7 +49,7 @@
 
                             <div class="form-group text-center">
                                 <div class="col-xs-12 p-b-20">
-                                    <button class="btn btn-block btn-lg btn-info" type="submit">Log In</button>
+                                    <button class="btn btn-block btn-lg btn-info" type="submit">Login</button>
                                 </div>
                             </div>
 

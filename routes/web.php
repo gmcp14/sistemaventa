@@ -10,6 +10,7 @@ use App\Http\Controllers\Usuarios;
 use App\Http\Controllers\Reportes_productos;
 use App\Http\Controllers\Compras;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\Checkrol;
 
 Route::get('/crear-admin', [AuthController::class, 'crearAdmin']);
 Route::get('/', [AuthController::class, 'index'])->name('login');
@@ -26,11 +27,15 @@ Route::prefix('ventas')->group(function(){
     Route::get('/agregar-carrito/{id_producto}', [ventas::class, 'agregar_carrito'])->name('ventas.agregar.carrito');
     Route::get('/borrar-carrito', [ventas::class, 'borrar_carrito'])->name('ventas.borrar.carrito');
     Route::get('/quitar-carrito/{id_producto}', [ventas::class, 'quitar_carrito'])->name('ventas.quitar.carrito');
+    Route::post('/vender', [ventas::class, 'vender'])->name('ventas.vender');
 });
 Route::prefix('detalle')->middleware('auth')->group(function(){
     Route::get('/detalle-venta', [DetalleVentas::class, 'index'])->name('detalle-venta');
-});
-Route::prefix('categorias')->middleware('auth')->group(function(){
+    Route::get('/vista-detalle/{id_venta}', [DetalleVentas::class, 'vista_detalle'])->name('detalle.vista.detalle');
+    Route::delete('/revocar/{id_venta}', [DetalleVentas::class, 'revocar'])->name('detalle.revocar');
+    Route::get('/ticket/{id_venta}', [DetalleVentas::class, 'generarticket'])->name('detalle.ticket');
+    });
+Route::prefix('categorias')->middleware('auth', 'Checkrol:admin')->group(function(){
     Route::get('/', [Categorias::class, 'index'])->name('categorias');
     Route::get('/create', [Categorias::class, 'create'])->name('categorias.create');
     Route::post('/store', [Categorias::class, 'store'])->name('categorias.store');
@@ -39,7 +44,7 @@ Route::prefix('categorias')->middleware('auth')->group(function(){
     Route::get('/edit/{id}', [Categorias::class, 'edit'])->name('categorias.edit');
     Route::put('/update/{id}', [Categorias::class, 'update'])->name('categorias.update');
 });
-Route::prefix('productos')->middleware('auth')->group(function(){
+Route::prefix('productos')->middleware('auth', 'Checkrol:admin')->group(function(){
     Route::get('/', [Productos::class, 'index'])->name('productos');
     Route::get('/create', [Productos::class, 'create'])->name('productos.create');
     Route::post('/store', [Productos::class, 'store'])->name('productos.store');
@@ -52,13 +57,13 @@ Route::prefix('productos')->middleware('auth')->group(function(){
     Route::get('/cambiar-estado/{id}/{estado}', [Productos::class, 'estado'])->name('productos.estado');
 });
 
-Route::prefix('reportes_productos')->middleware('auth')->group(function(){
+Route::prefix('reportes_productos')->middleware('auth', 'Checkrol:admin')->group(function(){
     Route::get('/', [Reportes_productos::class, 'index'])->name('reportes_productos');
     Route::get('/falta-stock', [Reportes_productos::class, 'falta_stock'])->name('reportes_productos.falta-stock');
     
 });
 
-Route::prefix('proveedores')->middleware('auth')->group(function(){
+Route::prefix('proveedores')->middleware('auth', 'Checkrol:admin')->group(function(){
     Route::get('/', [Proveedores::class, 'index'])->name('proveedores');
     Route::get('/create', [Proveedores::class, 'create'])->name('proveedores.create');
     Route::post('/store', [Proveedores::class, 'store'])->name('proveedores.store');
@@ -67,7 +72,7 @@ Route::prefix('proveedores')->middleware('auth')->group(function(){
     Route::get('/show/{id}', [Proveedores::class, 'show'])->name('proveedores.show');
     Route::delete('/destroy/{id}', [Proveedores::class, 'destroy'])->name('proveedores.destroy');
 });
-Route::prefix('usuarios')->middleware('auth')->group(function(){
+Route::prefix('usuarios')->middleware('auth', 'Checkrol:admin')->group(function(){
     Route::get('/', [Usuarios::class, 'index'])->name('usuarios');
     Route::get('/create', [Usuarios::class, 'create'])->name('usuarios.create');
     Route::post('/store', [Usuarios::class, 'store'])->name('usuarios.store');
@@ -78,7 +83,7 @@ Route::prefix('usuarios')->middleware('auth')->group(function(){
     Route::get('/cambiar-password/{id}/{password}', [Usuarios::class, 'cambio_password'])->name('usuarios.password');
 });
 
-Route::prefix('compras')->middleware('auth')->group(function(){
+Route::prefix('compras')->middleware('auth', 'Checkrol:admin')->group(function(){
     Route::get('/', [Compras::class, 'index'])->name('compras');
     Route::get('/create/{id_producto}', [Compras::class, 'create'])->name('compras.create');
     Route::post('/store', [Compras::class, 'store'])->name('compras.store');

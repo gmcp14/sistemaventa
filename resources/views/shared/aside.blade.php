@@ -14,10 +14,10 @@
                                 <span class="hide-menu">Dashboard</span>
                             </a>
                         </li>
-                        
+                        @can('ver-ventas')
                         <li class="sidebar-item">
                             <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-                                <i class="mdi mdi-tune"></i>
+                                <i class="fas fa-shopping-bag"></i>
                                 <span class="hide-menu">Ventas </span>
                             </a>
                             <ul aria-expanded="false" class="collapse  first-level">
@@ -36,15 +36,18 @@
                                 
                             </ul>
                         </li>
+                        @endcan
+
+                        @can('ver-admin')
                          <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('categorias') }}" aria-expanded="false">
-                                <i class="mdi mdi-border-style"></i>
+                                <i class=" fas fa-list-ol"></i>
                                 <span class="hide-menu">Categorias</span>
                             </a>
                         </li>
                          <li class="sidebar-item">
                             <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-                                <i class="mdi mdi-tune"></i>
+                                <i class="fas fa-boxes"></i>
                                 <span class="hide-menu">Productos </span>
                             </a>
                             <ul aria-expanded="false" class="collapse  first-level">
@@ -65,19 +68,14 @@
                         </li>
                           <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('compras') }}" aria-expanded="false">
-                                <i class="mdi mdi-border-style"></i>
+                                <i class="fas fa-shopping-cart"></i>
                                 <span class="hide-menu">Compras</span>
                             </a>
                         </li>
-                         <!-- <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('productos') }}" aria-expanded="false">
-                                <i class="mdi mdi-border-style"></i>
-                                <span class="hide-menu">Productos</span>
-                            </a>
-                        </li> -->
+                         
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('proveedores') }}" aria-expanded="false">
-                                <i class="mdi mdi-border-style"></i>
+                                <i class=" fas fa-truck-moving"></i>
                                 <span class="hide-menu">Proveedores</span>
                             </a>
                         </li>
@@ -87,7 +85,7 @@
                                 <span class="hide-menu">Usuarios</span>
                             </a>
                         </li>
-
+                         @endcan
                      
                     </ul>
                 </nav>
