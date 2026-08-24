@@ -1,91 +1,110 @@
 @extends('layouts.login')
 @section('titulo',$titulo)
 @section('contenido')
+<style>
+    /* Estilos para lograr el diseño moderno y glassmorphism */
+    .auth-wrapper-custom {
+        position: relative;
+        min-height: 100vh;
+        background: url('{{ asset("img/almacen.jpg") }}') no-repeat center center / cover;
+    }
+    /* Overlay oscuro sobre el fondo para dar contraste */
+    .auth-wrapper-custom::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(15, 23, 42, 0.55); /* Capa oscura semi-transparente */
+        backdrop-filter: blur(2px);
+        z-index: 1;
+    }
+    .auth-box-custom {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 420px;
+        padding: 40px 30px;
+        background: rgba(255, 255, 255, 0.15); /* Transparencia del cristal */
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 16px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        color: #ffffff;
+    }
+    .auth-box-custom .form-control {
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid transparent;
+        border-radius: 8px;
+    }
+    .auth-box-custom .input-group-text {
+        background: rgba(255, 255, 255, 0.9);
+        border: none;
+        border-radius: 8px 0 0 8px;
+    }
+    .auth-box-custom .btn-custom {
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+        transition: all 0.3s ease;
+    }
+    .auth-box-custom .btn-custom:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(0, 123, 255, 0.45);
+    }
+</style>
+
 <div class="main-wrapper">
-    <!-- ============================================================== -->
-    <!-- Preloader - style you can find in spinners.css -->
-    <!-- ============================================================== -->
     <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
             <div class="lds-pos"></div>
         </div>
     </div>
-    <!-- ============================================================== -->
-    <!-- Preloader - style you can find in spinners.css -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- Login box.scss -->
-    <!-- ============================================================== -->
-    <div class="auth-wrapper d-flex no-block justify-content-center align-items-center"
-        style="background:url(../../assets/images/big/auth-bg.jpg) no-repeat center center;">
-        <div class="auth-box">
+
+    <div class="auth-wrapper-custom d-flex justify-content-center align-items-center">
+        <div class="auth-box-custom">
             <div id="loginform">
-                <div class="logo">
-                    <span class="db"><img src="{{asset('img/login.jpg')}}" alt="logo"  class="img-fluid"/></span>
-                    <h3 class="font-medium m-b-20">Ventas y Almacén</h3>
+                <div class="logo text-center mb-3">
+                    <!-- Es recomendable que la imagen del logo tenga fondo transparente (PNG) -->
+                    <span class="db"><img src="{{ asset('img/logo-2.png') }}" alt="logo" class="img-fluid" style="max-height: 90px; border-radius: 8px;"/></span>
+                    <h3 class="font-medium m-t-15 text-white">Ventas y Almacén</h3>
                 </div>
-                <h5 class="text-center">Ingresa Usuario y Contraseña</h5>
-                <!-- Form -->
-                <div class="row">
-                    
-                    <div class="col-12">
-                        <form class="form-horizontal m-t-20" id="loginform" method="POST" action="{{route('logear')}}">
-                            @csrf
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1"><i class="ti-user"></i></span>
-                                </div>
-                                <input type="text" class="form-control form-control-lg" placeholder="Email"
-                                    aria-label="email" aria-describedby="basic-addon1" name="email" required>
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon2"><i class="ti-pencil"></i></span>
-                                </div>
-                                <input type="text" class="form-control form-control-lg" placeholder="Contraseña"
-                                    aria-label="password" aria-describedby="basic-addon1" name="password" required>
-                            </div>
-
-                            <div class="form-group text-center">
-                                <div class="col-xs-12 p-b-20">
-                                    <button class="btn btn-block btn-lg btn-info" type="submit">Login</button>
-                                </div>
-                            </div>
-
-
-                        </form>
-                        <div>
-                            @if($errors->any())
-                            <p>
-                            <ul>
-                                @foreach($errors->all() as $error)
-                                <li>{{$error}}</li>
-                                @endforeach
-                            </ul>
-                            </p>
-                            @endif
+                <p class="text-center text-white-50 mb-4">Ingresa tu usuario y contraseña</p>
+                
+                <form class="form-horizontal" id="loginform" method="POST" action="{{ route('logear') }}">
+                    @csrf
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ti-user text-dark"></i></span>
                         </div>
+                        <input type="text" class="form-control form-control-lg" placeholder="Email" name="email" required>
                     </div>
-                </div>
-            </div>
+                    <div class="input-group mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ti-pencil text-dark"></i></span>
+                        </div>
+                        <input type="password" class="form-control form-control-lg" placeholder="Contraseña" name="password" required>
+                    </div>
 
+                    <div class="form-group text-center">
+                        <button class="btn btn-block btn-lg btn-primary btn-custom" type="submit">Iniciar Sesión</button>
+                    </div>
+                </form>
+
+                @if($errors->any())
+                <div class="mt-3">
+                    <ul class="pl-3 mb-0">
+                        @foreach($errors->all() as $error)
+                        <li class="text-warning small">{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+            </div>
         </div>
     </div>
-    <!-- ============================================================== -->
-    <!-- Login box.scss -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- Page wrapper scss in scafholding.scss -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- Page wrapper scss in scafholding.scss -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- Right Sidebar -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- Right Sidebar -->
-    <!-- ============================================================== -->
 </div>
 @endsection

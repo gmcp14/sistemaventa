@@ -16,7 +16,7 @@
                                 <!-- Dark Logo icon -->
                                 <img src="{{asset('img/logo.jpg')}}" alt="homepage" class="dark-logo" />
                                 <!-- Light Logo icon -->
-                                <img src="../../assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
+                                <img src="{{asset('img/logo-2.png')}}" alt="homepage" class="light-logo" width="53px"  />
                             </b>
                             <!--End Logo icon -->
                             <!-- Logo text -->
@@ -43,7 +43,8 @@
                     
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="../../assets/images/users/2.jpg" alt="user" class="rounded-circle" width="40">
+                                <!-- <img src="../../assets/images/users/2.jpg" alt="user" class="rounded-circle" width="40"> -->
+                                <i class=" fas fa-user-circle"></i>
                                 <span class="m-l-5 font-medium d-none d-sm-inline-block">{{Auth::user()->name}} <i class="mdi mdi-chevron-down"></i></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
@@ -52,7 +53,9 @@
                                 </span>
                                 <div class="d-flex no-block align-items-center p-15 bg-primary text-white m-b-10">
                                     <div class="">
-                                        <img src="../../assets/images/users/2.jpg" alt="user" class="rounded-circle" width="60">
+                                        <!-- <img src="../../assets/images/users/2.jpg" alt="user" class="rounded-circle" width="60"> -->
+                                       
+                                         <img src="../../assets/images/users/2.jpg" alt="user" class="rounded-circle" width="60">
                                     </div>
                                     <div class="m-l-10">
                                         <h4 class="m-b-0">{{Auth::user()->name}}</h4>
